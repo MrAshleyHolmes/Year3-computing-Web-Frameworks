@@ -1,0 +1,46 @@
+<?php
+
+?>
+
+<head>
+    <style>
+        table,
+        td,
+        th {
+            border: .1rem solid black;
+            padding: .1rem;
+        }
+    </style>
+</head>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Author Id</th>
+        <th>url</th>
+    </tr>
+
+    <?php
+//-----------------------------
+    foreach ($publications as $publication) {
+
+        /**
+         * @var $publication \Itb\Publication
+         */
+//-----------------------------
+        ?>
+        <tr>
+            <td><?= $publication->getId() ?></td>
+            <td><?= $publication->getTitle() ?></td>
+            <td><?= $publication->getAuthorId() ?></td>
+<!--            <td>--><?//= $publication->getUrl() ?><!--</td>-->
+            <td>
+                <a href="<?= $publication->getUrl() ?>">download</a>
+            </td>
+        </tr>
+        <?php
+//-----------------------------
+}
+//-----------------------------
+    ?>
+</table>

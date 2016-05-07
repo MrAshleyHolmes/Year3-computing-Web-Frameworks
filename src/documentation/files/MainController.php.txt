@@ -1,0 +1,94 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ashleyholmes
+ * Date: 31/03/2016
+ * Time: 00:39
+ */
+
+namespace Itb;
+
+/**
+ * Class MainController
+ * @package Itb\contollers
+ */
+
+class MainController
+{
+    /**
+     * displays the home page
+     */
+    public function indexAction()
+    {
+        $actions = Action::getAll();
+
+/*        var_dump($actions);*/
+
+        require __DIR__ . '/../templates/index.php';
+        require_once __DIR__ . '/../templates/loginForm.php';
+    }
+
+    /**
+     * displays the list of actions
+     */
+    public function listAction()
+    {
+        $actions = Action::getAll();
+
+/*        var_dump($actions);*/
+
+        require __DIR__ . '/../templates/list.php';
+    }
+
+    /**
+     * forgets the session on the page
+     */
+    public function forgetSession()
+    {
+        $this->killSession();
+//        print 'SESSION has been destroyed - all session data deleted';
+//        print '<p><a href="/">back to home page</a>';
+        $this->indexAction();
+    }
+
+    /**
+     * kills the session on the page
+     */
+    public function killSession()
+    {
+        $_SESSION = [];
+        if (ini_get('session.use_cookies')) {
+            $params = session_get_cookie_params();
+            setcookie(session_name(),
+                '', time() - 42000,
+                $params['path'], $params['domain'],
+                $params['secure'], $params['httponly']
+            );
+        }
+        session_destroy();
+    }
+
+    /**
+     * handles the submission of the user login form
+     */
+    public function processLoginAction()
+    {
+        // default is bad login
+        $isLoggedIn = false;
+
+        $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+
+        // search for user with username in repository
+        $isLoggedIn = User::canFindMatchingUsernameAndPassword($username, $password);
+
+        // action depending on login success
+        if ($isLoggedIn) {
+            // success - found a matching username and password
+            require_once __DIR__ . '/../templates/loginSuccess.php';
+        } else {
+            $message = 'bad username or password, please try again';
+            require_once __DIR__ . '/../templates/message.php';
+        }
+    }
+}

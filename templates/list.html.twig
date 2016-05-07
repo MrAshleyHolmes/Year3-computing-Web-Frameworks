@@ -1,0 +1,45 @@
+{#--------------------------#}
+{# templates/list.html.twig #}
+{#--------------------------#}
+
+{% extends '_base.html.twig' %}
+
+{% block title %}actions page{% endblock %}
+
+{% block main %}
+    <h1>This is the actions page</h1>
+
+    <table>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Implementor Id</th>
+                <th>Deadline</th>
+                <th>Status</th>
+            </tr>
+        {% for action in actions %}
+            <tr>
+                <td>
+                    {{ action.id }}
+                </td>
+
+                <td>
+                    {{ action.description }}
+                </td>
+
+                <td>
+                    {{ action.implementorId }}
+                </td>
+
+                <td>
+                    {{ action.deadline }}
+                </td>
+
+                <td>
+                    {{ action.status }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

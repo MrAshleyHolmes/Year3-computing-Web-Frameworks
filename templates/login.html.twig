@@ -1,0 +1,37 @@
+{#--------------------------#}
+{# templates/login.html.twig #}
+{#--------------------------#}
+
+{% extends '_base.html.twig' %}
+
+{% block title %}login page{% endblock %}
+
+{% block main %}
+
+{#    {% if errorMessage %}
+    <p class="error">
+        {{ errorMessage }}
+    </p>
+
+    <hr>
+
+{% endif %}#}
+
+    <h1>Please login</h1>
+    <form
+            method="post"
+            action="/processLogin">
+
+        <p>
+            Username:
+            <input type="text" name="username" autofocus>
+        </p>
+        <p>
+            Password:
+            <input type="text" name="password">
+        </p>
+        <input type="submit" value="login">
+    </form>
+
+
+{% endblock %}

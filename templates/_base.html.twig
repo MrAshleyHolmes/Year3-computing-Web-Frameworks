@@ -1,0 +1,70 @@
+{#---------------------------#}
+{# templates/_base.html.twig #}
+{#---------------------------#}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document - {% block title %}{% endblock %}</title>
+    <style>
+        @import '/css/style.css';
+        @import '/public/css/basic.css';
+        @import '/public/css/nav.css';
+        @import '/public/css/footer.css';
+    </style>
+</head>
+<body>
+
+<!-- login header -->
+<header>
+    <!-- nav -->
+    <nav>
+        <nav>
+            <ul>
+                <li>
+                    <a href="/">home</a>
+                </li>
+                <li>
+                    <a href="/list">actions</a>
+                </li>
+                <li>
+                    <a href="/show">publication</a>
+                </li>
+                <li>
+                    <a href="/sendMessage">messages</a>
+                </li>
+            </ul>
+
+            {# --------- secure links - only if logged in ----------- #}
+{#
+            {% if username %}
+                {% include 'admin/_adminLinks.html.twig'  %}
+            {% endif %}
+#}
+        </nav>
+    </nav>
+
+    <!-- login / logout -->
+    <section>
+        <a href="/login">Login</a>
+    </section>
+{#
+    <section>
+        {% if username %}
+            you are logged in as: {{ username }}
+            <br>
+            <a href="/logout">logout</a>
+        {% else %}
+            <a href="/login">Login</a>
+        {% endif %}
+    </section>
+#}
+</header>
+<hr>
+
+{% block main %}
+{% endblock %}
+
+</body>
+</html>

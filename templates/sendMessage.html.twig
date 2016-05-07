@@ -1,0 +1,39 @@
+{#---------------------------------#}
+{# templates/sendMessage.html.twig #}
+{#---------------------------------#}
+
+{% extends '_base.html.twig' %}
+
+{% block title %}send messages page{% endblock %}
+
+{% block main %}
+    <h1>This is the message page</h1>
+
+    <fieldset>
+        <legend>Send us a message to say hi!</legend>
+
+        <form
+                method="post"
+                action="?action=processMessageForm"
+        >
+
+            <p>
+                Your message:
+                <br>
+                <textarea name="text" cols="40" rows="5" required></textarea>
+            </p>
+
+            <p>
+                Your name:
+                <br>
+                <input type="text" name="user" required>
+            </p>
+
+            <p>
+                <input type="submit" value="send message">
+            </p>
+
+        </form>
+    </fieldset>
+
+{% endblock %}
